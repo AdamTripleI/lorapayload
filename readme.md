@@ -1,4 +1,4 @@
-### LoraPayload
+# LoraPayload
 
 ## Introduction
 
@@ -8,7 +8,7 @@ This does not decode/decrypt the lora packet itself, like you'll see in packages
 
 ## Usage
 
-# Using a Known Device
+### Using a Known Device
 
 The module includes a **very** incomplete collection of device names that have pre-made Payload Decoding Expressions.
 
@@ -26,7 +26,7 @@ decoded = pl.Parse(lorapayload.Payload("AZIBMyUAAAAAAA=="))
 #{'Battery': 5.1000000000000005, 'Temperature': 3.7, 'LowTempAlarm': 0, 'HighTempAlarm': 0, 'manufacturer': 'Netvox', 'model': 'R718CT'}
 ```
 
-# Using a Custom Decoding String
+### Using a Custom Decoding String
 
 The library allows you to use custom decoding strings
 
@@ -42,7 +42,7 @@ decoded = pl.Parse(lorapayload.Payload("AZIBMyUAAAAAAA==",encoding="base64"))
 #{'Battery': 5.1000000000000005, 'Temperature': 3.7}
 ```
 
-# Using CayenneLPP
+### Using CayenneLPP
 
 The library also supports the CayennaLPP format, which is a common self-describing payload format.
 
@@ -64,15 +64,15 @@ decoded = pl.Parse(lorapayload.Payload("03 67 01 10 05 67 00 FF",encoding="hex")
 
 Decoding strings are made up of the following parts...
 
-# Periods
+### Periods
 
 A period (.) character matches with //any// byte value.
 
-# Square Brackets (Byte Value Matches)
+### Square Brackets (Byte Value Matches)
 
 Square brackets define the value of a byte that must match exactly. For example, **[0]** indicates that the byte value //must// be zero. This can be a comma-delimited list of values if more than one is acceptable (ie. [0,1,2] would accept byte values of zero, one or two). Any number starting with the character 'x' will be treated as hexidecimal (ie [xA0] would be 160).
 
-# Round Brackets (Capture Regions)
+### Round Brackets (Capture Regions)
 
 Round brackets indicate a value you would like to capture. Inside the round brackets should be a //name//, a //struct format// and optionally a set of //transformations//, delimited by the ':' character.
 
@@ -86,13 +86,13 @@ For example, 'Active:B' would be a byte named 'Active'.
 
 'Temperature:>h:*0.1*1.8+32' would read that same temperature and convert it from //celcius// to //fahrenheit//.
 
-# Curly Brackets (Bitmasks)
+### Curly Brackets (Bitmasks)
 
 Curly brackets/braces indicate a //bitmask//. In this case, the byte is assumed to contain alerts or similar status indicators in each bit of the byte. Enter the names of each different state/status as a comma-delimited list.
 
 For example, {Low Alarm,High Alarm,Sensor Error} would treat the first bit of the byte as a Low Alarm indicator, the second bit as a High Alarm and the third as a Sensor Error indicator.
 
-# Putting It Together
+### Putting It Together
 
 Below is an example of a decoder for the R718CT...
 
