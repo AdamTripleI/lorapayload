@@ -1,0 +1,44 @@
+{
+	"R718CT": {
+		"manufacturer": "Netvox",
+		"model": "R718CT",
+		"payloads": [
+			"[1][x92][0](SVersion:B:*0.1)(HVersion:B:*0.1)(Date:<L)",
+			"[1][x92][1](Battery:B:*0.1)(Temperature:<h:*0.1){LowTempAlarm,HighTempAlarm}"
+		]
+	},
+	"R718CK": {
+		"manufacturer": "Netvox",
+		"model": "R718CK",
+		"payloads": [
+			"[1][x91][0](SVersion:B:*0.1)(HVersion:B:*0.1)(Date:<L)",
+			"[1][x91][1](Battery:B:*0.1)(Temperature:<h:*0.1){LowTempAlarm,HighTempAlarm}"
+		]
+	},
+	"R718CN": {
+		"manufacturer": "Netvox",
+		"model": "R718CN",
+		"payloads": [
+			"[1][x93][0](SVersion:B:*0.1)(HVersion:B:*0.1)(Date:<L)",
+			"[1][x93][1](Battery:B:*0.1)(Temperature:<h:*0.1){LowTempAlarm,HighTempAlarm}"
+		]
+	},
+	"R718CR": {
+		"manufacturer": "Netvox",
+		"model": "R718CR",
+		"payloads": [
+			"[1][x93][0](SVersion:B:*0.1)(HVersion:B:*0.1)(Date:<L)",
+			"[1][x93][1](Temperature:<h:*0.1)(Battery:B:*0.1){LowTempAlarm,HighTempAlarm}"
+		]
+	},
+	"R718E": {
+		"manufacturer": "Netvox",
+		"model": "R718E",
+		"payloads": [
+			"[1][x1C][0](SVersion:B:*0.1)(HVersion:B:*0.1)(Date:<L)",
+			"[1][x1C][1](Battery:B:*0.1)(AccX:<f)(AccY:<f)(AccZ:<f)(Active:B)",
+			"[1][x1C][2](VelX:<e)(VelY:<e)(VelZ:<e)(Temperature:<h:*0.1)",
+			"[1][x1C][3](Battery:B:*0.1)(AngleX:<h:*0.005)(AngleY:<h:*0.005)(AngleZ:<h:*0.005){LowAngleX,HighAngleX,LowAngleY,HighAngleY,LowAngleZ,HighAngleZ}"
+		]
+	}
+}
