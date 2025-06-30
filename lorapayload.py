@@ -92,7 +92,11 @@ class PatternMatch:
     def __init__(self,name,fmt,ops):
         self.name = name
         self.format = fmt
-        self.size = struct.calcsize(fmt)
+        if fmt[0] == 'S':
+            self.size = int(fmt[1:])
+            self.format = "S"
+        else:
+            self.size = struct.calcsize(fmt)
         self.ops = None
 
         if len(ops) > 0:
@@ -179,8 +183,12 @@ class Pattern:
             if elements[x] == '{':
                 groupopen = x+1
             if elements[x] == '}':
-                value = elements[groupopen:x].split(',')
-                self.patternparts.append(["B",value])
+                value = elements[groupopen:x].split(',')                
+                if value[0] != "" and value[0][0] == '!':
+                    value[0] = value[0][1:]
+                    self.patternparts.append(["S",value])
+                else:
+                    self.patternparts.append(["B",value])
                 
                 groupopen = None
 
@@ -255,7 +263,13 @@ class Pattern:
                 md = buffer[offset:offset+bufsize]
                 offset += bufsize                             
 
-                resp[step.name] = step.Transform(struct.unpack(step.format,md)[0])
+                if step.format == "S":
+                    #Read as string
+                    st = md.decode('ascii')                                    
+                    resp[step.name] = st.strip('\x00')
+                else:
+                    #Read as number
+                    resp[step.name] = step.Transform(struct.unpack(step.format,md)[0])
             else:
                 if step[0] == "=":                                
                     if buffer[offset] not in step[1]:
@@ -269,13 +283,30 @@ class Pattern:
                     offset += 1
                     continue                   
 
+                #Extract Bitmask
                 if step[0] == "B":
                     vl = int(buffer[offset])
                     for q in range(0,len(step[1])):
-                        if (vl & 1>>q) != 0:
-                            resp[step[1][q]] = 1
-                        else:
-                            resp[step[1][q]] = 0
+                        if step[1][q] != "":
+                            if (vl & 1>>q) != 0:
+                                resp[step[1][q]] = 1
+                            else:
+                                resp[step[1][q]] = 0
+
+                    offset += 1
+
+                #Extract Bitmask as String
+                if step[0] == "S":
+                    vl = int(buffer[offset])
+                    for q in range(0,len(step[1])-1):
+
+                        resp[step[1][0]] = ""
+                        if step[1][q+1] != "":
+                            if (vl & 1>>q) != 0:                                
+                                if resp[step[1][0]] == "":
+                                    resp[step[1][0]] = step[1][q]
+                                else:
+                                    resp[step[1][0]] += ", " + step[1][q]                           
 
                     offset += 1
 

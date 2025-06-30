@@ -4,7 +4,7 @@
 		"model": "R718CT",
 		"payloads": [
 			"[1][x92][0](SVersion:B:*0.1)(HVersion:B:*0.1)(Date:<L)",
-			"[1][x92][1](Battery:B:*0.1)(Temperature:<h:*0.1){LowTempAlarm,HighTempAlarm}"
+			"[1][x92][1](Battery:B:*0.1)(Temperature:>h:*0.1){LowTempAlarm,HighTempAlarm}"
 		]
 	},
 	"R718CK": {
@@ -12,7 +12,7 @@
 		"model": "R718CK",
 		"payloads": [
 			"[1][x91][0](SVersion:B:*0.1)(HVersion:B:*0.1)(Date:<L)",
-			"[1][x91][1](Battery:B:*0.1)(Temperature:<h:*0.1){LowTempAlarm,HighTempAlarm}"
+			"[1][x91][1](Battery:B:*0.1)(Temperature:>h:*0.1){LowTempAlarm,HighTempAlarm}"
 		]
 	},
 	"R718CN": {
@@ -20,7 +20,7 @@
 		"model": "R718CN",
 		"payloads": [
 			"[1][x93][0](SVersion:B:*0.1)(HVersion:B:*0.1)(Date:<L)",
-			"[1][x93][1](Battery:B:*0.1)(Temperature:<h:*0.1){LowTempAlarm,HighTempAlarm}"
+			"[1][x93][1](Battery:B:*0.1)(Temperature:>h:*0.1){LowTempAlarm,HighTempAlarm}"
 		]
 	},
 	"R718CR": {
@@ -28,7 +28,7 @@
 		"model": "R718CR",
 		"payloads": [
 			"[1][x93][0](SVersion:B:*0.1)(HVersion:B:*0.1)(Date:<L)",
-			"[1][x93][1](Temperature:<h:*0.1)(Battery:B:*0.1){LowTempAlarm,HighTempAlarm}"
+			"[1][x93][1](Temperature:>h:*0.1)(Battery:B:*0.1){LowTempAlarm,HighTempAlarm}"
 		]
 	},
 	"R718E": {
@@ -37,8 +37,44 @@
 		"payloads": [
 			"[1][x1C][0](SVersion:B:*0.1)(HVersion:B:*0.1)(Date:<L)",
 			"[1][x1C][1](Battery:B:*0.1)(AccX:<f)(AccY:<f)(AccZ:<f)(Active:B)",
-			"[1][x1C][2](VelX:<e)(VelY:<e)(VelZ:<e)(Temperature:<h:*0.1)",
-			"[1][x1C][3](Battery:B:*0.1)(AngleX:<h:*0.005)(AngleY:<h:*0.005)(AngleZ:<h:*0.005){LowAngleX,HighAngleX,LowAngleY,HighAngleY,LowAngleZ,HighAngleZ}"
+			"[1][x1C][2](VelX:<e)(VelY:<e)(VelZ:<e)(Temperature:>h:*0.1)",
+			"[1][x1C][3](Battery:B:*0.1)(AngleX:>h:*0.005)(AngleY:>h:*0.005)(AngleZ:>h:*0.005){LowAngleX,HighAngleX,LowAngleY,HighAngleY,LowAngleZ,HighAngleZ}"
+		]
+	},
+	"XS770A": {
+		"manufacturer": "Yokogawa",
+		"model": "XS770A",
+		"payloads": [
+			"[x41](Status:>L)(StatusDetail:>H)",
+			"[x43](Lat:>f)(Lon:>f)",
+			"[x47](VendorID:>L)(DeviceType:>H)(Revision:>H)",
+			"[x10].{Z Simulation,,,Temperature High,Z Speed High,Z Acceleration High,Temperature Error,Z Speed Error,Z Acceleration Error}(ZAcceleration:>e)(ZVelocity:>e)",
+			"[x11].{Simulation,,Temperature High,Speed High,Acceleration High,Temperature Error,Speed Error,Acceleration Error}(Acceleration:>e)(Velocity:>e)(Temperature:>e)",			
+			"[x12].{X Simulation,,,,X Speed High,X Acceleration High,,X Speed Error,X Acceleration Error}(XAcceleration:>e)(XVelocity:>e)",
+			"[x13].{Y Simulation,,,,Y Speed High,Y Acceleration High,,Y Speed Error,Y Acceleration Error}(YAcceleration:>e)(YVelocity:>e)"
+		]
+	},
+	"XS530A": {
+		"manufacturer": "Yokogawa",
+		"model": "XS530A",
+		"payloads": [
+			"[x41](Status:>L)(StatusDetail:>H)",
+			"[x43](Lat:>f)(Lon:>f)",
+			"[x47](VendorID:>L)(DeviceType:>H)(Revision:>H)",
+			"[x30].{Pressure Simulation,,,,Pressure Over Range,,,Pressure Error}(Pressure:>f)",
+			"[x31].{Temperature Simulation,,,,Temperature Over Range,,,Temperature Error}(Temperature:>f)"
+			
+		]
+	},
+	"XS550A": {
+		"manufacturer": "Yokogawa",
+		"model": "XS550A",
+		"payloads": [
+			"[x41](Status:>L)(StatusDetail:>H)",
+			"[x43](Lat:>f)(Lon:>f)",
+			"[x47](VendorID:>L)(DeviceType:>H)(Revision:>H)",
+			"[x20].{Temp 1 Simulation,,,,Temp 1 Over Range,,,Temp 1 Error}(Temperature1:>f)",
+			"[x21].{Temp 2 Simulation,,,,Temp 2 Over Range,,,Temp 2 Error}(Temperature2:>f)"			
 		]
 	}
 }
