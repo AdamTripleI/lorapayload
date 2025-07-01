@@ -86,11 +86,23 @@ For example, 'Active:B' would be a byte named 'Active'.
 
 'Temperature:>h:*0.1*1.8+32' would read that same temperature and convert it from _celcius_ to _fahrenheit_.
 
+You can also read ASCII strings with a non-standard format specifier 'S', followed by the total number of bytes. For example, 'S10' reads ten characters of ASCII text and trims any NULL characters from the resulting string.
+
 ### Curly Brackets (Bitmasks)
 
 Curly brackets/braces indicate a _bitmask_. In this case, the byte is assumed to contain alerts or similar status indicators in each bit of the byte. Enter the names of each different state/status as a comma-delimited list.
 
 For example, {Low Alarm,High Alarm,Sensor Error} would treat the first bit of the byte as a Low Alarm indicator, the second bit as a High Alarm and the third as a Sensor Error indicator.
+
+You can leave a blank space to ignore a specific bit (ie. {Low Alarm,,High Alarm} will use bits #1 and #3 but ignore the value of bit #2).
+
+### Bitmasks to Text
+
+As an alternative to bitmasks having one JSON property for each bit, you can instead translate many bits into a single text string.
+
+This uses the curly brace format from above, but the first item is an _exclaimation point_ followed by a _property name_.
+
+For example, {!Status,Low Alarm,High Alarm,Sensor Error,Low Battery} creates a property called **Status** that contains any combination of the values 'Low Alarm' (when bit #1 is 1), 'High Alarm' (when bit #2 is 1) etc. Multiple bits might be '1' at the same time and will be comma-delimited (ie. Status might be 'Sensor Error, Low Battery').
 
 ### Putting It Together
 
