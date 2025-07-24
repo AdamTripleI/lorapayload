@@ -7,6 +7,14 @@
 			"[1][x92][1](Battery:B:*0.1)(Temperature:>h:*0.1){LowTempAlarm,HighTempAlarm}"
 		]
 	},
+	"R718AB": {
+		"manufacturer": "Netvox",
+		"model": "R718AB",
+		"payloads": [
+			"[1][x13][0](SVersion:B:*0.1)(HVersion:B:*0.1)(Date:<L)",
+			"[1][x13][1](Battery:B:*0.1)(Temperature:>h:*0.01)(Humidity:>H:*0.01)"
+		]
+	},
 	"R718CK": {
 		"manufacturer": "Netvox",
 		"model": "R718CK",
@@ -48,10 +56,10 @@
 			"[x41](Status:>L)(StatusDetail:>H)",
 			"[x43](Lat:>f)(Lon:>f)",
 			"[x47](VendorID:>L)(DeviceType:>H)(Revision:>H)",
-			"[x10].{Z Simulation,,,Temperature High,Z Speed High,Z Acceleration High,Temperature Error,Z Speed Error,Z Acceleration Error}(ZAcceleration:>e)(ZVelocity:>e)",
-			"[x11].{Simulation,,Temperature High,Speed High,Acceleration High,Temperature Error,Speed Error,Acceleration Error}(Acceleration:>e)(Velocity:>e)(Temperature:>e)",			
-			"[x12].{X Simulation,,,,X Speed High,X Acceleration High,,X Speed Error,X Acceleration Error}(XAcceleration:>e)(XVelocity:>e)",
-			"[x13].{Y Simulation,,,,Y Speed High,Y Acceleration High,,Y Speed Error,Y Acceleration Error}(YAcceleration:>e)(YVelocity:>e)"
+			"[x10].{Z Simulation,,,Temperature High,Z Speed High,Z Acceleration High,Temperature Error,Z Speed Error,Z Acceleration Error}(ZAcceleration:<e)(ZVelocity:<e)",
+			"[x11].{Simulation,,Temperature High,Speed High,Acceleration High,Temperature Error,Speed Error,Acceleration Error}(Acceleration:<e)(Velocity:<e)(Temperature:<e)",			
+			"[x12].{X Simulation,,,,X Speed High,X Acceleration High,,X Speed Error,X Acceleration Error}(XAcceleration:<e)(XVelocity:<e)",
+			"[x13].{Y Simulation,,,,Y Speed High,Y Acceleration High,,Y Speed Error,Y Acceleration Error}(YAcceleration:<e)(YVelocity:<e)"
 		]
 	},
 	"XS530A": {
@@ -76,5 +84,26 @@
 			"[x20].{Temp 1 Simulation,,,,Temp 1 Over Range,,,Temp 1 Error}(Temperature1:>f)",
 			"[x21].{Temp 2 Simulation,,,,Temp 2 Over Range,,,Temp 2 Error}(Temperature2:>f)"			
 		]
+	},
+	"_json": {
+		"payloads": [
+			"data",
+			"uplink_message.frm_payload"
+		],
+		"application": [
+			"application",
+			"applicationName",
+			"end_device_ids.application_ids.application_id"			
+		],
+		"device": [
+			"device",
+			"deviceName",
+			"end_device_ids.device_id"
+		],
+		"deveui": [
+			"devEUI",
+			"dev_eui",
+			"end_device_ids.dev_eui"
+		]		
 	}
 }
